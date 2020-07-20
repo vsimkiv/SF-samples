@@ -1,0 +1,41 @@
+<apex:page controller="PaginationController">
+    
+    <apex:form >
+        <apex:pageBlock title="Contacts" id="page">
+            <apex:pageBlockTable value="{!Contacts}" var="item" >
+                <apex:column value="{!item.Name}"/>
+                <apex:column value="{!item.Account.Name}"/>
+                <apex:column value="{!item.Title}"/>
+                <apex:column value="{!item.Phone}"/>
+                <apex:column value="{!item.Email}"/>
+                <apex:column value="{!item.Birthdate}"/>
+            </apex:pageBlockTable>
+            
+            <p>Page: {!pageNumber} of {!amountOfPages}. </p>
+            <p>Records: {!(pageNumber-1)*pageSize+1}..{!(pageNumber)*pageSize} of {!amountOfRecords}</p>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="first"
+                                    action="{!firstPage}"
+                                    rerender="page"
+                                    disabled="{!disableFirstPrevious}"/>
+                
+                <apex:commandButton value="previous"
+                                    action="{!previousPage}"
+                                    rerender="page"
+                                    disabled="{!disableFirstPrevious}"/>
+                
+                <apex:commandButton value="next"
+                                    action="{!nextPage}"
+                                    reRender="page"
+                                    disabled="{!disableNextLast}"/>
+                
+                <apex:commandButton value="last"
+                                    action="{!lastPage}"
+                                    rerender="page"
+                                    disabled="{!disableNextLast}"/>
+  
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

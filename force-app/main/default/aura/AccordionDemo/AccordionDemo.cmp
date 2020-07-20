@@ -1,0 +1,43 @@
+<aura:component controller="AccordionAuraController" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" 
+                access="global" >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="members" type="List"/>
+    
+    <div class="slds-box slds-theme_inverse">
+        
+        <lightning:accordion aura:id="accordion" class="slds-accordion">
+            <aura:iteration items="{!v.members}" var="mitem">
+                <lightning:accordionSection name="{!mitem.Name}" label="{!mitem.Name}"
+                                            class="slds-accordion__section slds-is-open">
+                    <aura:set attribute="body">
+                        <div class="slds-card slds-theme_inverse">
+                        <p><b>Active Clients</b> : {!mitem.Active_Clients__c}</p>
+                        <p><b>Capacity</b> : 
+                            <lightning:formattedNumber value="{!mitem.Capacity__c/100}"
+                                                       style="percent"/>
+                        </p>
+                        <p><b>Actual Client Share</b> : <lightning:formattedNumber value="{!mitem.Actual_Client_Share__c/100}"
+                                                                                   style="percent"/>
+                        </p>
+                        <p><b>Workload</b> : 
+                            <lightning:formattedNumber value="{!mitem.Workload__c/100}"
+                                                       style="percent"/>
+                        </p>
+                        </div>
+                        <div class="slds-card slds-theme_inverse">
+                        <b>Clients</b> :
+                        <aura:iteration items="{!mitem.Clients__r}" var="citem">
+                            <p><i> - {!citem.Name}</i></p>
+                        </aura:iteration>
+                        </div>
+                    </aura:set>
+                </lightning:accordionSection>
+            </aura:iteration>
+        </lightning:accordion>
+        
+    </div>
+    
+</aura:component>

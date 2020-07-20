@@ -1,0 +1,9 @@
+<aura:component >
+	<aura:method name="GetMessageFromHusband"
+                 action="{!getMessage}"
+                 access="public">
+    	<aura:attribute name="messageHusband"
+                        type="String"
+                        default="Love"/>
+    </aura:method>
+</aura:component>
